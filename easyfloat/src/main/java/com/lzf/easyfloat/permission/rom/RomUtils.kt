@@ -9,7 +9,7 @@ import java.io.InputStreamReader
 
 /**
  * @author: liuzhenfeng
- * @github：https://github.com/princekin-f/EasyHttp
+ * @github：https://github.com/princekin-f/EasyFloat
  * @function: 判断手机ROM
  * @date: 2020-01-07  22:30
  */
@@ -31,23 +31,6 @@ object RomUtils {
         return 4.0
     }
 
-    /**
-     * 获取小米 rom 版本号，获取失败返回 -1
-     *
-     * @return miui rom version code, if fail , return -1
-     */
-    fun getMiuiVersion(): Int {
-        val version = getSystemProperty("ro.miui.ui.version.name")
-        if (version != null) {
-            try {
-                return version.substring(1).toInt()
-            } catch (e: Exception) {
-                Log.e(TAG, "get miui version code error, version : $version")
-            }
-        }
-        return -1
-    }
-
     @JvmStatic
     fun getSystemProperty(propName: String): String? {
         val line: String
@@ -57,7 +40,7 @@ object RomUtils {
             input = BufferedReader(InputStreamReader(p.inputStream), 1024)
             line = input.readLine()
             input.close()
-        } catch (ex: IOException) {
+        } catch (ex: Exception) {
             Log.e(TAG, "Unable to read sysprop $propName", ex)
             return null
         } finally {
